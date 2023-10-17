@@ -4453,7 +4453,7 @@ enum tfa_error tfa_start(int next_profile, int *vstep)
 #if defined(TFA_USE_DEVICE_SPECIFIC_CONTROL)
 		if (active_handle != -1) {
 			if (dev != active_handle) {
-				err = _tfa_stop(dev); /* stop inactive handle */
+				err = (enum tfa98xx_error)_tfa_stop(dev); /* stop inactive handle */
 				continue;
 			}
 		}
@@ -4621,7 +4621,7 @@ enum tfa_error tfa_stop(void)
 			pr_debug("Stopping device [%s]\n",
 				tfa_cont_device_name(dev));
 
-		err = _tfa_stop(dev);
+		err = (enum tfa98xx_error)_tfa_stop(dev);
 		if (err != TFA98XX_ERROR_OK)
 			goto error_exit;
 
